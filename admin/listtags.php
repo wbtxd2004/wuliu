@@ -139,12 +139,12 @@ $expresses=array (
 
 <script>
 function ck(){
-	if(document.form1.money.value==""){
-		alert("请输入金额");
-		document.form1.money.focus();
-		return false;
-	}
-	}
+  if(document.form1.money.value==""){
+    alert("请输入金额");
+    document.form1.money.focus();
+    return false;
+  }
+  }
  function  CheckAll()  
 {  
    for(var  i=0;i<document.form1.elements.length;i++){  
@@ -155,22 +155,22 @@ function ck(){
 }  
 /*
 function ck2(){
-	if(document.form1.money.value==""){
-		alert("请选择出生年！");
-		return false;
-	}
-	
-	if(document.form1.month.value==""){
-		alert("请选择出生月！");
-		return false;
-	}
-	
-	if(document.form1.day.value==""){
-		alert("请选择出生日！");
-		return false;
-	}
-	
-	}
+  if(document.form1.money.value==""){
+    alert("请选择出生年！");
+    return false;
+  }
+  
+  if(document.form1.month.value==""){
+    alert("请选择出生月！");
+    return false;
+  }
+  
+  if(document.form1.day.value==""){
+    alert("请选择出生日！");
+    return false;
+  }
+  
+  }
 */
 </script>
 <br>
@@ -357,8 +357,8 @@ select
                    <INPUT type=checkbox value=<?php echo $r[tid]; ?> name=idarray[]>
 <?php
 }
-?>				   
-				   
+?>           
+           
 </td>
 </tr>
 <?php

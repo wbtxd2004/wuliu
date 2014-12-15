@@ -57,7 +57,7 @@ else
 </td></tr>
 <tr  align=center class=b><td>已有图片：</td><td>
 <?php
-$sql="select * from admin_get_message_images where mid=$tid";
+$sql="select * from admin_get_message_images where mid=$tid and filetype='0'";
 	$r=mysql_db_query($DataBase,$sql);
 	$n=mysql_num_rows($r);
 	//$obj=mysql_fetch_array($r);
@@ -82,7 +82,7 @@ $sql="select * from admin_get_message_images where mid=$tid";
 <!--修改声音上传部分，Changed By WuBin in 20141212-->
 <tr  align=center class=b><td>已有声音：</td><td>
 <?php
-$sql="select * from admin_get_message_images where mid=$tid";
+$sql="select * from admin_get_message_images where mid=$tid and filetype='1'";
 	$queryaudio=mysql_db_query($DataBase,$sql);
 	$audionum=mysql_num_rows($queryaudio);
 	if($audionum==0) echo "无";
@@ -93,7 +93,8 @@ $sql="select * from admin_get_message_images where mid=$tid";
 			if ($audiobj[filetype]!=1) {
 				echo "无 2";
 			}else{
-			echo "<input type='checkbox' name='checkaudio[]' value='".$audiobj["tid"]."'><a href=message_audio/".$audiobj["filename"]." target=_blank><embed src=message_audio/".$audiobj["filename"]." /></a>&nbsp;&nbsp;";
+			//echo "<input type='checkbox' name='checkaudio[]' value='".$audiobj["tid"]."'><a href=message_audio/".$audiobj["filename"]." target=_blank><embed src=message_audio/".$audiobj["filename"]." /></a>&nbsp;&nbsp;";
+			echo "<input type='checkbox' name='checkaudio[]' value='".$audiobj["tid"]."'><a href=message_audio/".$audiobj["filename"]." target=_blank>{$audiobj["filename"]}</a>&nbsp;&nbsp;";
 			}
 		}
 	}

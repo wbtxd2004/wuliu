@@ -58,7 +58,7 @@ $result = mysql_db_query($DataBase, $query);
 ?>
 <table width=98% align=center cellspacing=1 cellpadding=3 class=i_table>
 <tr>
-  <td class=head colspan=9><b>管理员私信列表</b></td>
+  <td class=head colspan=10><b>管理员私信列表</b></td>
 </tr>
 <tr align="center" class="head_1">
 <td>ID</td>
@@ -68,6 +68,8 @@ $result = mysql_db_query($DataBase, $query);
 <td>发件人ID</td>
 <td>IP地址</td>
 <td>发送时间</td>
+<td>图片</td>
+<td>声音</td>
 <td>编辑</td>
 <td>删除</td>
 </tr>
@@ -84,6 +86,45 @@ while($row=mysql_fetch_array($result))
 	echo "<td>".$row["admin_id"]."</td>";
 	echo "<td>".$row["ip"]."</td>";
 	echo "<td>".$row["dtime"]."</td>";
+	echo "<td>";
+	$sql="select filename from admin_get_message_images where mid=$row[tid] and filetype='0'";
+	$r=mysql_db_query($DataBase,$sql);
+	$n=mysql_num_rows($r);
+	if($n==0) echo "无";
+	else
+	{
+		while($obj=mysql_fetch_array($r))
+		{
+			echo "<a href=message_image/big/".$obj["filename"]." target=_blank>{$obj["filename"]}</a>&nbsp;&nbsp;";
+		}
+	}
+
+
+	echo "</td>";
+
+	##########在列表添加声音文件名显示， By WuBin in 20141214#########
+	echo "<td>";
+	$queryaudio="select filename from admin_get_message_images where mid=$row[tid] and filetype='1'";
+	$raudio=mysql_db_query($DataBase,$queryaudio);
+	$naudio=mysql_num_rows($raudio);
+	if($naudio==0) echo "无";
+	else
+	{
+		while($audiobj=mysql_fetch_array($raudio))
+		{
+			echo "<a href=message_audio/".$audiobj["filename"]." target=_blank>{$audiobj["filename"]}</a>&nbsp;&nbsp;";
+		}
+	}
+
+
+	echo "</td>";
+
+	##########change over #########
+
+
+
+
+
 	echo "<td><a href='edit_admin_message.php?tid=".$row["tid"]."'>编辑</a></td>";
 	echo "<td>";
 	?>

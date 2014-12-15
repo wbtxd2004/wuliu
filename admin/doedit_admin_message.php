@@ -150,8 +150,8 @@ for($i=0;$i<$num2;$i++)
 	$query2="SELECT filename FROM admin_get_message_images WHERE tid=$temp2";
 	$result2=mysql_db_query($DataBase,$query2);
 	$row2=mysql_fetch_array($result2);
-	unlink("message_image/big/".$row2["filename"]);
-	unlink("message_image/small/".$row2["filename"]);
+	unlink("message_audio/".$row2["filename"]);
+	//unlink("message_image/small/".$row2["filename"]);
 	$query2="DELETE FROM admin_get_message_images WHERE `tid`=$temp2";
 	mysql_db_query($DataBase, $query2);
 }
@@ -216,7 +216,7 @@ $query="SELECT filename FROM admin_get_message_images WHERE mid=$tid";
 	$result2=mysql_db_query($DataBase,$query);
 	$offset2=mysql_num_rows($result);
 
-for($i=0;$i<$num2;$i++)
+for($i=0;$i<$up_num2;$i++)
 {
 
 	$tmp_name=$_FILES['upload_file1']['tmp_name'][$i];
@@ -243,7 +243,9 @@ $result = mysql_db_query($DataBase, $query);
 if($result){
 echo"私信编辑成功！";
 			
-echo "<META HTTP-EQUIV=REFRESH CONTENT='1;URL=list_admin_message.php'>";
+$uu="$_SERVER[HTTP_REFERER]"; 
+
+echo "<META HTTP-EQUIV=REFRESH CONTENT='1;URL=$uu'>";
 }
 ?>
 <?php include("bottom.html"); ?>
