@@ -78,32 +78,33 @@ $result = mysql_db_query($DataBase, $query);
 
 while($row=mysql_fetch_array($result))
 {
-	echo "<tr  align=center class=b>";
-	echo "<td>".$row["tid"]."</td>";
-	echo "<td>".$row["biaoti"]."</td>";
-	echo "<td>".$row["info"]."</td>";
-	echo "<td>".$row["member_id"]."</td>";
-	echo "<td>".$row["admin_id"]."</td>";
-	echo "<td>".$row["ip"]."</td>";
-	echo "<td>".$row["dtime"]."</td>";
-	echo "<td>";
-	$sql="select filename from admin_get_message_images where mid=$row[tid] and filetype='0'";
-	$r=mysql_db_query($DataBase,$sql);
-	$n=mysql_num_rows($r);
-	if($n==0) echo "无";
-	else
-	{
-		while($obj=mysql_fetch_array($r))
+?>
+<tr align=center class=b>
+<td><?php echo $row["tid"];?></td>
+<td><?php echo $row["biaoti"];?></td>
+<td><?php echo $row["info"];?></td>
+<td><?php echo $row["member_id"];?></td>
+<td><?php echo $row["admin_id"];?></td>
+<td><?php echo $row["ip"];?></td>
+<td><?php echo $row["dtime"];?></td>
+<td>
+	<?php
+		$sql="select filename from admin_get_message_images where mid=$row[tid] and filetype='0'";
+		$r=mysql_db_query($DataBase,$sql);
+		$n=mysql_num_rows($r);
+		if($n==0) echo "无";
+		else
 		{
-			echo "<a href=message_image/big/".$obj["filename"]." target=_blank>{$obj["filename"]}</a>&nbsp;&nbsp;";
+			while($obj=mysql_fetch_array($r))
+			{
+				echo "<a href=message_image/big/".$obj["filename"]." target=_blank>{$obj["filename"]}</a>&nbsp;&nbsp;";
+			}
 		}
-	}
 
-
-	echo "</td>";
-
-	##########在列表添加声音文件名显示， By WuBin in 20141214#########
-	echo "<td>";
+	?>
+</td>
+<td>
+	<?php
 	$queryaudio="select filename from admin_get_message_images where mid=$row[tid] and filetype='1'";
 	$raudio=mysql_db_query($DataBase,$queryaudio);
 	$naudio=mysql_num_rows($raudio);
@@ -116,31 +117,29 @@ while($row=mysql_fetch_array($result))
 		}
 	}
 
-
-	echo "</td>";
-
 	##########change over #########
-
-
-
-
-
-	echo "<td><a href='edit_admin_message.php?tid=".$row["tid"]."'>编辑</a></td>";
-	echo "<td>";
 	?>
+</td>
+<td>
+	<?php
+		echo "<a href='edit_admin_message.php?tid=".$row["tid"]."'>编辑</a>";
+	?>
+</td>
+<td>
 	<a onClick="if(confirm('您确定删除吗?')) {return true;}else {return false;}"  href="del_admin_message.php?tid=<?php echo $row["tid"];?>" class="button"  >删除</a>
-	<?php echo "</td>";
-	echo "</tr>\n";
-}
+</td>
+</tr>
+	<?php } ?>
+</table>
 
-echo "</table>\n";
-?>
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-weight:bold;">
   
     <tr><td style="height:28px;width:100%;"><font style="font-weight:bold;">&nbsp;&nbsp;&nbsp;
     共有<font id="red"><?php echo $amount; ?></font>条&nbsp;&nbsp;共有<font id="red"><?php echo $pagecount; ?></font>页&nbsp;&nbsp;<font id="red"><?php echo $page;?></font>/<?php echo $pagecount;?> </font>
     &nbsp;&nbsp;  <a href="?page=1" class="backs">[首页]</a>&nbsp;&nbsp;<?php $i=$_GET[page]-4;$j=$_GET[page]+4;if($i<1){$i=1;}if($j>$pagecount){$j=$pagecount;}for($u=$i;$u<=$j;$u++){echo "&nbsp;<a href=?page=$u>$u</a>";} ?>
-    &nbsp;&nbsp;  <a href="?page=<?php echo $pagecount;?>" class="backs">[尾页]</a></td></tr>
+    &nbsp;&nbsp;  <a href="?page=<?php echo $pagecount;?>" class="backs">[尾页]</a>
+	<a href="?tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page-1);?>&&invoice=<?php echo $_GET[invoice];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>" >上一页</a>   <a href="?tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page+1);?>&invoice=<?php echo $_GET[invoice];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>">下一页</a>
+    </td></tr>
    
    
 </table>
