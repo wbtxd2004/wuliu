@@ -269,6 +269,33 @@ function CheckAll(form)
 </table>
 </td></tr>
 
+<tr><td>
+<table width=98% align=center cellspacing=1 cellpadding=4 class=i_table>
+    <tr>
+        <td class=head height=18>
+            <a style="float:right" href="#" onClick="return IndexDeploy('a0',1)">
+                <img id="img_a0" src="./images/cate_fold.gif" border=0 alt='open'>
+            </a>
+            <b>问答管理</b>
+        </td>
+
+    </tr>
+    <tbody id="cate_a0" style="">
+    <tr>
+        <td class=left_padding>
+        
+        
+    <a href="addask.php" target="mainframe">添加问题</a><br>
+            
+    <a href="listask.php" target="mainframe">问题列表</a><br>
+            
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+</td></tr>
+
     <tr><td>
 <table width=98% align=center cellspacing=1 cellpadding=4 class=i_table>
     <tr>
