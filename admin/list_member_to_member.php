@@ -58,16 +58,18 @@ $result = mysql_db_query($DataBase, $query);
 ?>
 <table width=98% align=center cellspacing=1 cellpadding=3 class=i_table>
 <tr>
-  <td class=head colspan=9><b>会员私信列表</b></td>
+  <td class=head colspan=12><b>会员私信列表</b></td>
 </tr>
 <tr align="center" class="head_1">
 <td>ID</td>
 <td>标题</td>
 <td>内容</td>
-<td>收件人ID</td>
 <td>发件人ID</td>
+<td>收件人ID</td>
 <td>IP地址</td>
 <td>发送时间</td>
+<td>图片</td>
+<td>声音</td>
 <td>编辑</td>
 <td>删除</td>
 </tr>
@@ -81,15 +83,45 @@ while($row=mysql_fetch_array($result))
 <td> <?php echo $row["tid"]; ?></td>
 <td> <?php echo $row["biaoti"]; ?></td>
 <td> <?php echo $row["info"]; ?></td>
-<td> <?php echo $row["receive_id"]; ?></td>
 <td> <?php echo $row["send_id"]; ?></td>
+<td> <?php echo $row["receive_id"]; ?></td>
 <td> <?php echo $row["ip"]; ?></td>
 <td> <?php echo $row["dtime"]; ?></td>
 <td>
-	<?php 
-		echo "<a href='edit_member_to_member.php?tid=".$row["tid"]."'>编辑</a>";
+	<?php
+		$sql="select filename from member_to_member_images where mid=$row[tid] and filetype='0'";
+		$r=mysql_db_query($DataBase,$sql);
+		$n=mysql_num_rows($r);
+		if($n==0) echo "无";
+		else
+		{
+			while($obj=mysql_fetch_array($r))
+			{
+				echo "<a href=message_image/big/".$obj["filename"]." target=_blank style='display:block'>";
+				echo "{$obj["filename"]}";
+				echo "</a>";
+			}
+		}
 	?>
 </td>
+<td>
+	<?php 
+		$queryaudio="select filename from member_to_member_images where mid=$row[tid] and filetype='1'";
+		$raudio=mysql_db_query($DataBase,$queryaudio);
+		$naudio=mysql_num_rows($raudio);
+		if($naudio==0) echo "无";
+		else
+		{
+			while($audiobj=mysql_fetch_array($raudio))
+			{
+				echo "<a href=message_audio/".$audiobj["filename"]." target=_blank style='display:block'>";
+				echo "{$audiobj["filename"]}";
+				echo "</a>";
+			}
+		}
+	?>
+</td>
+<td> <?php echo "<a href='edit_member_to_member.php?tid=".$row["tid"]."'>编辑</a>"; ?></td>
 <td>
 	<a onClick="if(confirm('您确定删除吗?')) {return true;}else {return false;}"  href="del_member_to_member.php?tid=<?php echo $row["tid"];?>" class="button"  >删除</a>
 
@@ -102,9 +134,7 @@ while($row=mysql_fetch_array($result))
     <tr><td style="height:28px;width:100%;"><font style="font-weight:bold;">&nbsp;&nbsp;&nbsp;
     共有<font id="red"><?php echo $amount; ?></font>条&nbsp;&nbsp;共有<font id="red"><?php echo $pagecount; ?></font>页&nbsp;&nbsp;<font id="red"><?php echo $page;?></font>/<?php echo $pagecount;?> </font>
     &nbsp;&nbsp;  <a href="?page=1" class="backs">[首页]</a>&nbsp;&nbsp;<?php $i=$_GET[page]-4;$j=$_GET[page]+4;if($i<1){$i=1;}if($j>$pagecount){$j=$pagecount;}for($u=$i;$u<=$j;$u++){echo "&nbsp;<a href=?page=$u>$u</a>";} ?>
-    &nbsp;&nbsp;  <a href="?page=<?php echo $pagecount;?>" class="backs">[尾页]</a>
-	<a href="?tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page-1);?>&&invoice=<?php echo $_GET[invoice];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>" >上一页</a>   <a href="?tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page+1);?>&invoice=<?php echo $_GET[invoice];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>">下一页</a>
-    </td></tr>
+    &nbsp;&nbsp;  <a href="?page=<?php echo $pagecount;?>" class="backs">[尾页]</a></td></tr>
    
    
 </table>

@@ -58,7 +58,7 @@ $result = mysql_db_query($DataBase, $query);
 ?>
 <table width=98% align=center cellspacing=1 cellpadding=3 class=i_table>
 <tr>
-  <td class=head colspan=10><b>管理员私信列表</b></td>
+  <td class=head colspan=11><b>管理员私信列表</b></td>
 </tr>
 <tr align="center" class="head_1">
 <td>ID</td>
