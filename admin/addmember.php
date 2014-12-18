@@ -17,10 +17,10 @@ include("header.html");
 
 
 <tr align=center>
-  <td class=b width=29%>用户名:</td>
+  <td class=b width=29%>用户名（昵称）:</td>
   <td colspan="3" class=b><input type=text name=username size=50></td></tr>
   <tr align=center>
-  <td class=b width=29%>真实姓名（昵称）:</td>
+  <td class=b width=29%>真实姓名:</td>
   <td colspan="3" class=b><input type=text name=name size=50></td></tr>
    <tr align=center>
   <td class=b width=29%>密码:</td>
@@ -35,51 +35,8 @@ include("header.html");
   <td class=b width=29%>财富值:</td>
   <td colspan="3" class=b><input type=text name=caifu size=50></td></tr>  
 
-<!--<tr align=center>
-  <td class=b width=29%>提问数:</td>
-  <td colspan="3" class=b><input type=text name=questions size=50></td></tr>  
-  <tr align=center>
-  <td class=b width=29%>回答数:</td>
-  <td colspan="3" class=b><input type=text name=replys size=50></td></tr>  
--->
-<!--<tr align=center>
-  <td class=b width=29%>所属单位(单位管理员才需要选择此项):</td>
-  <td colspan="3" class=b><SELECT   name=danwei_id>
-                  <?php
-$query = "select * from  danwei    order by tid desc ";
-$result = mysql_db_query($DataBase, $query); 
-					
-while ($r2 = mysql_fetch_array($result)) 
-{
-
-if($r2[tid]==$_GET[tid])
-{
-echo"<option value=$r2[tid]  selected=\"selected\">$r2[ip]</option>";
-}else
-{
-echo"<option value=$r2[tid] >$r2[ip]</option>";
-}
 
 
-}
-                     
-?> 
-          </SELECT></td></tr>  
-<tr align=center>
-  <td class=b width=29%>选择权限:</td>
-  
-  <td width="31%" align="center" class=b>
-    <INPUT type=radio  value=1 
-                  name=states>超级管理员
-  <INPUT type=radio CHECKED value=2 
-                  name=states>  副超级管理员
-				  
-   <INPUT type=radio CHECKED value=3 
-                  name=states>  单位管理员				  
-  <br />
-	</td>
-  
-</tr>-->
 </table></td></tr>
 </table>
 <br><center><input type='submit' value='提交'></center></form>

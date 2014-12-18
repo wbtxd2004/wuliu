@@ -32,8 +32,7 @@ exit;
 $ip = $_SERVER["REMOTE_ADDR"];
 $dbtime=date("Y-m-d H:i:s");
 
-$query = "INSERT INTO admin_get_message(`biaoti`,`info`,`member_id`,`admin_id`,`ip`,`dtime`) VALUES('$biaoti','$info','2','3','4','2014-11-11') ";
-//$query = "INSERT INTO danwei (name,username,password,msgid) VALUES ('$_POST[name]','$_POST[username]','$_POST[password]','$_POST[msgid]')";
+$query = "INSERT INTO danwei (name,username,password,msgid) VALUES ('$_POST[name]','$_POST[username]','$_POST[password]','$_POST[msgid]')";
 $result = mysql_db_query($DataBase, $query);
 if($result){
 echo"单位添加成功！";

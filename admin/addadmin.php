@@ -1,6 +1,7 @@
 <?php
 include_once("checksession.php");
 include("header.html");
+include_once("../db.php");
 ?>
 <META http-equiv=Content-Type content=text/html;charset=utf-8>
 
@@ -33,27 +34,27 @@ include("header.html");
 
 <tr align=center>
   <td class=b width=29%>所属单位(单位管理员才需要选择此项):</td>
-  <td colspan="3" class=b><SELECT   name=danwei_id>
-                  <?php
-$query = "select * from  danwei    order by tid desc ";
-$result = mysql_db_query($DataBase, $query); 
-					
-while ($r2 = mysql_fetch_array($result)) 
-{
-
-if($r2[tid]==$_GET[tid])
-{
-echo"<option value=$r2[tid]  selected=\"selected\">$r2[ip]</option>";
-}else
-{
-echo"<option value=$r2[tid] >$r2[ip]</option>";
-}
-
-
-}
-                     
-?> 
-                </SELECT></td></tr>  
+  <td colspan="3" class=b>
+    <SELECT   name=danwei_id>
+        <?php
+          $query = "select * from  danwei    order by tid desc ";
+          $result = mysql_db_query($DataBase, $query); 
+          					
+          while ($r2 = mysql_fetch_array($result)) 
+          {
+            if($r2[tid]==$_GET[tid])
+            {
+              echo"<option value=$r2[tid]  selected=\"selected\">".$r2[name]."</option>";
+            }else
+            {
+              echo"<option value='$r2[tid]' >".$r2[name]."</option>";
+            }
+          }
+                               
+        ?> 
+    </SELECT>
+  </td>
+</tr>  
 <tr align=center>
   <td class=b width=29%>选择权限:</td>
   

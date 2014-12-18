@@ -31,8 +31,9 @@ exit;
 $ip = $_SERVER["REMOTE_ADDR"];
 $dbtime=date("Y-m-d H:i:s");
 
-$query = "INSERT INTO beian_manage (username,password,states) VALUES ('$_POST[username]','$_POST[password]','$_POST[states]')";
+$query = "INSERT INTO beian_manage (username,password,states,danwei_id,mobile) VALUES ('$_POST[username]','$_POST[password]','$_POST[states]','$_POST[danwei_id]',$_POST[mobile])";
 $result = mysql_db_query($DataBase, $query);
+var_dump($result);
 if($result){
 echo"管理员添加成功！";
 			

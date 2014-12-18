@@ -9,18 +9,18 @@ $r2=mysql_fetch_array($result);
 <html>
 <head>
 <title></title>
-<meta http-equiv="content-type" content="text/html; charset=gb2312" >
+<meta http-equiv="content-type" content="text/html; charset=utf-8" >
 <style type="text/css">
-table { border-top: 0px; border-left: 0px; border-bottom: 2px}
+table { BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 2px}
 select {
-    font-size: 12px;
-    color: #000000; background-color: #E0E2F1;
+	FONT-SIZE: 12px;
+	COLOR: #000000; background-color: #E0E2F1;
 }
-a { text-decoration: none; color:#000000}
+a { TEXT-DECORATION: none; color:#000000}
 a:hover{ text-decoration: underline;}
-body {font-family:Verdana;font-size: 12px;margin: 0;color: #000000;background: #F7F7F7;}
+body {font-family:Verdana;FONT-SIZE: 12px;MARGIN: 0;color: #000000;background: #F7F7F7;}
 textarea,input,object{font-size: 12px;}
-td { border-right: 1px; border-top: 0px; font-size: 12px; color: #000000;}
+td { BORDER-RIGHT: 1px; BORDER-TOP: 0px; FONT-SIZE: 12px; COLOR: #000000;}
 .b{background:#F7F7F7;}
 
 .head { color: #ffffff;background: #739ACE;font-weight:bold;}
@@ -39,12 +39,12 @@ td { border-right: 1px; border-top: 0px; font-size: 12px; color: #000000;}
 ifcheck = true;
 function CheckAll(form)
 {
-    for (var i=0;i<form.elements.length-2;i++)
-    {
-        var e = form.elements[i];
-        e.checked = ifcheck;
-    }
-    ifcheck = ifcheck == true ? false : true;
+	for (var i=0;i<form.elements.length-2;i++)
+	{
+		var e = form.elements[i];
+		e.checked = ifcheck;
+	}
+	ifcheck = ifcheck == true ? false : true;
 }
 </script>
 <!---->
@@ -103,29 +103,28 @@ function CheckAll(form)
     </tr>
     <tbody id="cate_a0" style="">
     <tr>
-        <td class=left_padding>
-        
-        
-    <a href="adddanwei.php" target="mainframe">添加单位</a><br>
-            
-    <a href="listdanwei.php" target="mainframe">单位列表</a><br>
-            
-    <a href="addadmin.php" target="mainframe">管理员添加</a><br>
-    
-    <a href="listadmin.php" target="mainframe">管理员列表</a><br>
-        
-<a href="addmember.php" target="mainframe">添加会员</a><br>
+		<td class=left_padding>
+		
+        		
+        	<a href="adddanwei.php" target="mainframe">添加单位</a><br>
+        			
+        	<a href="listdanwei.php" target="mainframe">单位列表</a><br>
+        			
+        	<a href="addadmin.php" target="mainframe">管理员添加</a><br>
+        	
+        	<a href="listadmin.php" target="mainframe">管理员列表</a><br><br>
+        		
+            <a href="addmember.php" target="mainframe">添加会员</a><br>
+
+        	<a href="listmember.php" target="mainframe">会员列表</a><br>
+        			
+            <a href="search_member.php" target="mainframe">会员搜索</a><br>	
 
 
-    <a href="listmember.php" target="mainframe">会员列表</a><br>
-            
-            
 
-
-
-            
-        </td>
-    </tr>
+			
+		</td>
+	</tr>
 
     </tbody>
 </table>
@@ -159,15 +158,15 @@ function CheckAll(form)
 
 <a href="addnews.php" target="mainframe">新闻添加</a><br>
 <a href="listnews.php" target="mainframe">新闻列表</a><br>
-
-            </td>
+<a href="search_news.php" target="mainframe">新闻搜索</a><br>
+			</td>
         </tr>
     </tbody>
 </table>
 </td></tr>
 
  
-    <tr><td>
+	<tr><td>
 <table width=98% align=center cellspacing=1 cellpadding=4 class=i_table>
     <tr>
         <td class=head height=18>
@@ -175,7 +174,7 @@ function CheckAll(form)
                 <img id="img_a2" src="./images/cate_fold.gif" border=0 alt='open'>
             </a>
 
-            <b>留言管理</b>
+            <b>问答管理</b>
         </td>
     </tr>
     <tbody id="cate_a2" style="">
@@ -188,21 +187,21 @@ function CheckAll(form)
 
  
    
-  
-   
-  <a href="listblock_id.php" target="mainframe">留言统计</a><br>
-  
-   
-  <a href="listblock_keyword.php" target="mainframe">留言管理</a><br>
 
+<a href="addask_category.php" target="mainframe">问答分类添加</a><br>
+<a href="listask_category.php" target="mainframe">问答分类列表</a><br>
+
+<a href="addask.php" target="mainframe">问答添加</a><br>
+<a href="listask.php" target="mainframe">问答列表</a><br>
+<a href="search_ask.php" target="mainframe">问答搜索</a><br>
  
-            </td>
+			</td>
         </tr>
     </tbody>
 </table>
 </td></tr>
 
-    <tr><td>
+	<tr><td>
 <table width=98% align=center cellspacing=1 cellpadding=4 class=i_table>
     <tr>
         <td class=head height=18>
@@ -219,11 +218,11 @@ function CheckAll(form)
                            
  
 
-            <a href="list_group.php" target="mainframe">查看群组</a><br>
-            <a href="add_group.php" target="mainframe">添加群组</a><br><br>
-            
-            <a href="list_record.php" target="mainframe">查看记录</a><br>
-            <a href="add_record.php" target="mainframe">添加记录</a><br>
+			<a href="list_group.php" target="mainframe">查看群组</a><br>
+			<a href="add_group.php" target="mainframe">添加群组</a><br><br>
+			
+			<a href="list_record.php" target="mainframe">查看记录</a><br>
+			<a href="add_record.php" target="mainframe">添加记录</a><br>
   
    
   
@@ -231,13 +230,13 @@ function CheckAll(form)
  
 
  
-            </td>
+			</td>
         </tr>
     </tbody>
 </table>
 </td></tr>
 
-    <tr><td>
+	<tr><td>
 <table width=98% align=center cellspacing=1 cellpadding=4 class=i_table>
     <tr>
         <td class=head height=18>
@@ -250,73 +249,47 @@ function CheckAll(form)
     <tbody id="cate_a4" style="">
         <tr>
             <td class=left_padding>
-            
-            
+			
+			
 
     <a href="add_admin_message.php" target="mainframe">添加私信（会员发管理员）</a><br>
     <a href="add_member_message.php" target="mainframe">添加私信（管理员发会员）</a><br>
     <a href="add_member_to_member.php" target="mainframe">添加私信（会员发会员）</a><br>
 
-        
+		
   <a href="list_admin_message.php" target="mainframe">管理接收会员私信列表</a><br>
   <a href="list_member_message.php" target="mainframe">会员接收管理员私信列表</a><br>
   
    <a href="list_member_to_member.php" target="mainframe">会员之间私信列表</a><br>
   
-            </td>
+			</td>
         </tr>
     </tbody>
 </table>
 </td></tr>
 
-<tr><td>
-<table width=98% align=center cellspacing=1 cellpadding=4 class=i_table>
-    <tr>
-        <td class=head height=18>
-            <a style="float:right" href="#" onClick="return IndexDeploy('a0',1)">
-                <img id="img_a0" src="./images/cate_fold.gif" border=0 alt='open'>
-            </a>
-            <b>问答管理</b>
-        </td>
-
-    </tr>
-    <tbody id="cate_a0" style="">
-    <tr>
-        <td class=left_padding>
-        
-        
-    <a href="addask.php" target="mainframe">添加问题</a><br>
-            
-    <a href="listask.php" target="mainframe">问题列表</a><br>
-            
-        </td>
-    </tr>
-
-    </tbody>
-</table>
-</td></tr>
-
-    <tr><td>
+	<tr><td>
 <table width=98% align=center cellspacing=1 cellpadding=4 class=i_table>
     <tr>
         <td class=head height=18>
             <a style="float:right" href="#" onClick="return IndexDeploy('a5',1)">
                 <img id="img_a5" src="./images/cate_fold.gif" border=0 alt='open'>
             </a>
-            <b>流量统计</b>
+            <b>公告管理</b>
         </td>
     </tr>
     <tbody id="cate_a5" style="">
         <tr>
             <td class=left_padding>
-  <a href="listblock_id.php" target="mainframe">流量统计</a><br>
-            </td>
+  <a href="addgonggao.php" target="mainframe">公告添加</a><br>
+   <a href="listgonggao.php" target="mainframe">公告列表</a><br>
+  			</td>
         </tr>
     </tbody>
 </table>
 </td></tr>
 
-    <tr><td>
+	<tr><td>
 <table width=98% align=center cellspacing=1 cellpadding=4 class=i_table>
     <tr>
         <td class=head height=18>
@@ -331,13 +304,13 @@ function CheckAll(form)
             <td class=left_padding>
   <a href="list_guanggao.php" target="mainframe">查看广告</a><br>
   <a href="add_guanggao.php" target="mainframe">添加广告</a><br>
-            </td>
+			</td>
         </tr>
     </tbody>
 </table>
 </td></tr>
 
-    <tr><td>
+	<tr><td>
 <table width=98% align=center cellspacing=1 cellpadding=4 class=i_table>
     <tr>
         <td class=head height=18>
@@ -350,9 +323,14 @@ function CheckAll(form)
     <tbody id="cate_a7" style="">
         <tr>
             <td class=left_padding>
-  <a href="listblock_id.php" target="mainframe">清除缓存</a><br>
-  <a href="listblock_keyword.php" target="mainframe">备份数据与还原</a><br>
-            </td>
+  
+  	        <a   onClick="if(confirm('are you sure?')) {return true;}else {return false;}"  href="database_data/backupall.php" target="mainframe">数据备份</a><br>
+			
+			<a   onClick="if(confirm('你确定恢复数据吗？慎重操作！?')) {return true;}else {return false;}"  href="database_data/restoreall.php" target="mainframe">数据恢复</a><br>
+			
+			
+			
+			</td>
         </tr>
     </tbody>
 </table>
@@ -360,7 +338,7 @@ function CheckAll(form)
 
 
  
-    <tr>
+	<tr>
         <td class=head_2 align=center>
 
             <b>manage</font></b>
