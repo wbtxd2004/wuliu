@@ -21,10 +21,10 @@ include_once("../db.php");
 
 <tr align=center>
   <td class=b width=29%>登录密码:</td>
-  <td colspan="3" class=b><input type=text name=password size=50></td></tr>
+  <td colspan="3" class=b><input type=password name=password size=50></td></tr>
 <tr align=center>
   <td class=b width=29%>密码确认:</td>
-  <td colspan="3" class=b><input type=text name=password2 size=50></td></tr>
+  <td colspan="3" class=b><input type=password name=password2 size=50></td></tr>
   
 
 <tr align=center>
@@ -59,14 +59,10 @@ include_once("../db.php");
   <td class=b width=29%>选择权限:</td>
   
   <td width="31%" align="center" class=b>
-    <INPUT type=radio  value=1 
-                  name=states>超级管理员
-  <INPUT type=radio CHECKED value=2 
-                  name=states>  副超级管理员
-				  
-   <INPUT type=radio CHECKED value=3 
-                  name=states>  单位管理员				  
-  <br />
+    <INPUT type=radio  value=1 name=states> 超级管理员
+    <INPUT type=radio CHECKED value=2 name=states>  副超级管理员	  
+    <INPUT type=radio CHECKED value=3 name=states>  单位管理员				  
+    <br />
 	</td>
   
 </tr>

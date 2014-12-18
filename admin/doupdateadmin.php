@@ -6,6 +6,8 @@ include("checksession.php");
 <META http-equiv=Content-Type content=text/html;charset=utf-8>
 
 <?php
+if(empty($_POST[username])){echo"用户名不能为空"; exit;}
+if($_POST[password]!=$_POST[password2] ){echo"密码不一致"; exit;}
 include_once("../db.php");
 $query = "select * from beian_manage where username='$_SESSION[adminusername2]' ";
 $result = mysql_db_query($DataBase, $query); 
@@ -15,7 +17,7 @@ if($r8[states]!=1)
 echo"不是超级管理员，不能操作";
 exit;
 }
-$sql = "update beian_manage set password='$_POST[password]',states='$_POST[states]'  where tid='$_GET[tid]' ";
+$sql = "UPDATE beian_manage set password='$_POST[password]',states='$_POST[states]',mobile='$_POST[mobile]',danwei_id='$_POST[danwei_id]'  where tid='$_GET[tid]' ";
 $rr = mysql_db_query($DataBase, $sql);
 
 
