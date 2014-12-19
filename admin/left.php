@@ -159,6 +159,12 @@ function CheckAll(form)
 <a href="addnews.php" target="mainframe">新闻添加</a><br>
 <a href="listnews.php" target="mainframe">新闻列表</a><br>
 <a href="search_news.php" target="mainframe">新闻搜索</a><br>
+
+
+
+
+<a href="listnews_reply.php" target="mainframe">新闻评论列表</a><br>
+
 			</td>
         </tr>
     </tbody>

@@ -47,7 +47,8 @@ exit;
                     
           while ($r2 = mysql_fetch_array($result)) 
           {
-            if($r2[tid]==$_GET[tid])
+            //if($r2[tid]==$_GET[tid])
+            if($r2[tid]==$r["danwei_id"])
             {
               echo"<option value=$r2[tid]  selected=\"selected\">".$r2[name]."</option>";
             }else
