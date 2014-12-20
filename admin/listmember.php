@@ -49,11 +49,13 @@ switch ($_GET['sorting']) {
 	case 'username':
 	case 'name':
 	case 'mobile':
+	case 'manage_id':
 	case 'questions':
 	case 'replys':
+	case 'caina':
 	case 'caifu':
+	case 'login_count':
 	case 'ip':
-	case 'dtime':
 		$orderBy .= $_GET['sorting'];
 		if(isset($_GET['desc'])){
 			$orderBy .= ' DESC';
@@ -89,7 +91,7 @@ $amount=mysql_num_rows($result);
 
 <table width=98% align=center cellspacing=1 cellpadding=3 class=i_table>
 <tr>
-  <td class=head colspan=11><b>会员列表修改管理</b></td>
+  <td class=head colspan=13><b>会员列表修改管理</b></td>
 </tr>
 <tr align="center" class="head_1">
 
@@ -126,6 +128,20 @@ $amount=mysql_num_rows($result);
 </td>
 <td>
 	<div align="center">
+	<b>财富值<br>
+	<?php echo sortingLink('caifu') ?>
+	</b>
+	</div>
+</td>
+<td>
+	<div align="center">
+	<b>单位名称</br>
+	<?php echo sortingLink('manage_id') ?>
+	</b>
+	</div>
+</td>
+<td>
+	<div align="center">
 	<b>会员发布问题数<br>
 	<?php echo sortingLink('questions') ?>
 	</b>
@@ -140,8 +156,15 @@ $amount=mysql_num_rows($result);
 </td>
 <td>
 	<div align="center">
-	<b>财富值<br>
-	<?php echo sortingLink('caifu') ?>
+	<b>采纳数<br>
+	<?php echo sortingLink('caina') ?>
+	</b>
+	</div>
+</td>
+<td>
+	<div align="center">
+	<b>登录次数<br>
+	<?php echo sortingLink('login_count') ?>
 	</b>
 	</div>
 </td>
@@ -149,13 +172,6 @@ $amount=mysql_num_rows($result);
 	<div align="center">
 	<b>提交记录的IP<br>
 	<?php echo sortingLink('ip') ?>
-	</b>
-	</div>
-</td>
-<td>
-	<div align="center">
-	<b>记录时间<br>
-	<?php echo sortingLink('dtime') ?>
 	</b>
 	</div>
 </td>
@@ -185,11 +201,31 @@ while ($r=mysql_fetch_array($result)) {
 <td><?php echo $r[username]; ?></td>
 <td><?php   echo $r[name];?></td>
 <td><?php   echo $r[mobile];?></td>
+<td><?php  echo $r[caifu]; ?></td>
+<td>
+	<?php
+	$query = "select * from beian_manage where tid = '$r[manage_id]' ";
+	//echo "select * from beian_manage where tid = '$r[manage_id]'  ";
+	//echo $query;
+
+	$result2 = mysql_db_query($DataBase, $query);
+	$r2=mysql_fetch_array($result2);
+	$danwei_id = $r2['danwei_id'];
+
+	$query = "select * from danwei where tid = '$danwei_id'  ";
+	//echo $query;
+	$result3 = mysql_db_query($DataBase, $query);
+	$r3=mysql_fetch_array($result3);
+	$danwei = $r3['name'];
+	echo $danwei;
+	?>
+</td>
 <td><?php   echo $r[questions];?></td>
 <td><?php   echo $r[replys];?></td>
-<td><?php  echo $r[caifu]; ?></td>
+<td><?php   echo $r[caina];?></td>
+
+<td><?php   echo $r[login_count];?></td>
 <td><?php   echo $r[ip];?></td>
-<td><?php   echo $r[dtime];?></td>
 <td>
 <a href=editmember.php?tid=<?php echo $r[tid]; ?>>编辑审核</a>
 <a onClick="if(confirm('您确定删除吗?')) {return true;}else {return false;}"  href="delmember.php?tid=<?php echo $r[tid];?>" class="button"  >删除</a>
@@ -239,7 +275,9 @@ mysql_free_result($result);
     <tr><td style="height:28px;width:100%;"><font style="font-weight:bold;">&nbsp;&nbsp;&nbsp;
     共有<font id="red"><?php echo $amount; ?></font>条&nbsp;&nbsp;共有<font id="red"><?php echo $pagecount; ?></font>页&nbsp;&nbsp;<font id="red"><?php echo $page;?></font>/<?php echo $pagecount;?> </font>
     &nbsp;&nbsp;  <a href="?page=1" class="backs">[首页]</a>&nbsp;&nbsp;<?php $i=$_GET[page]-4;$j=$_GET[page]+4;if($i<1){$i=1;}if($j>$pagecount){$j=$pagecount;}for($u=$i;$u<=$j;$u++){echo "&nbsp;<a href=?page=$u>$u</a>";} ?>
-    &nbsp;&nbsp;  <a href="?page=<?php echo $pagecount;?>" class="backs">[尾页]</a></td></tr>
+    &nbsp;&nbsp;  <a href="?page=<?php echo $pagecount;?>" class="backs">[尾页]</a>
+    <a href="?tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page-1);?>&&invoice=<?php echo $_GET[invoice];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>" >上一页</a>   <a href="?tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page+1);?>&invoice=<?php echo $_GET[invoice];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>">下一页</a>
+    </td></tr>
    
    
 </table>
