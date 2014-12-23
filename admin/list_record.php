@@ -72,22 +72,26 @@ $result = mysql_db_query($DataBase, $query);
 
 while($row=mysql_fetch_array($result))
 {
-	echo "<tr  align=center class=b>";
-	echo "<td>".$row["tid"]."</td>";
-	$temp=$row["cid"];
-	$re=mysql_fetch_array(mysql_db_query($DataBase,"SELECT name FROM $group WHERE tid=$temp"));
-	echo "<td>".$re[0]."</td>";
-	echo "<td>".$row["name"]."</td>";
-	echo "<td>".$row["mobile"]."</td>";
-	echo "<td><a href='edit_record.php?tid=".$row["tid"]."'>编辑</a></td>";
-	echo "<td>";
-	?>
-	<a onClick="if(confirm('您确定删除吗?')) {return true;}else {return false;}"  href="del_record.php?tid=<?php echo $row["tid"];?>" class="button"  >删除</a>
-	<?php echo "</td>";
-	echo "</tr>\n";
-}
-echo "</table>\n";
 ?>
+<tr align=center class=b>
+	<td><?php echo $row["tid"] ?></td>
+	<td>
+		<?php 
+			$temp=$row["cid"];
+			$re=mysql_fetch_array(mysql_db_query($DataBase,"SELECT name FROM $group WHERE tid=$temp")); 
+			echo $re[0];
+		?>
+	</td>
+	<td><?php echo $row["name"] ?></td>
+	<td><?php echo $row["mobile"] ?></td>
+	<td><a href=edit_record.php?tid=<?php echo $row[tid]; ?>>编辑</a></td>
+	<td>
+		<a onClick="if(confirm('您确定删除吗?')) {return true;}else {return false;}"  href="del_record.php?tid=<?php echo $row["tid"];?>" class="button"  >删除</a>
+	</td>
+</tr>
+<?php } ?>
+</table>
+
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-weight:bold;">
   
     <tr><td style="height:28px;width:100%;"><font style="font-weight:bold;">&nbsp;&nbsp;&nbsp;
