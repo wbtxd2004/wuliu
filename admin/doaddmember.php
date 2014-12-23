@@ -34,6 +34,7 @@ $dbtime=date("Y-m-d H:i:s");
 
 $query = "INSERT INTO member (username,name,password,mobile,caifu) VALUES ('$_POST[username]','$_POST[name]','$_POST[password]','$_POST[mobile]','$_POST[caifu]')";
 $result = mysql_db_query($DataBase, $query);
+//var_dump($result);
 if($result){
 echo"会员添加成功！";
 			
