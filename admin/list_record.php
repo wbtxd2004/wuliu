@@ -40,12 +40,6 @@ $a=($_GET[page]-1)*$page_size;
 
 
 
-
-
-
-
-
-
 $query = "select * from tongxun_record order by tid    limit $a,$page_size ";
 $result = mysql_db_query($DataBase, $query);
 
@@ -78,7 +72,7 @@ while($row=mysql_fetch_array($result))
 	<td>
 		<?php 
 			$temp=$row["cid"];
-			$re=mysql_fetch_array(mysql_db_query($DataBase,"SELECT name FROM $group WHERE tid=$temp")); 
+			$re=mysql_fetch_array(mysql_db_query($DataBase,"SELECT name FROM tongxun_group WHERE tid=$temp")); 
 			echo $re[0];
 		?>
 	</td>
@@ -103,3 +97,4 @@ while($row=mysql_fetch_array($result))
 </table>
 
 <?php include("bottom.html"); ?>
+
