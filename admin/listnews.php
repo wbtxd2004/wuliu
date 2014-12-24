@@ -7,7 +7,7 @@ include("header.html");
 
 <table width=98% align=center cellspacing=1 cellpadding=3 class=i_table>
 <tr>
-  <td class=head colspan=10><b>新闻列表修改管理</b></td>
+  <td class=head colspan=12><b>新闻列表修改管理</b></td>
 </tr>
 <tr align="center" class="head_1">
 <td>
@@ -70,6 +70,8 @@ include("header.html");
 </td>
 
 <td><b>操作</b></td>
+<td><b>推荐操作</b></td>
+<td><b>置頂操作</b></td>
 </tr>
 
 <?php
@@ -88,9 +90,7 @@ switch ($_GET['sorting']) {
 	case 'ip':
 	case 'dtime':
 		$orderBy .= $_GET['sorting'];
-		if(isset($_GET['desc'])){
-			$orderBy .= ' DESC';
-		}
+		if ($_GET['desc'] >= 1)$orderBy .= ' DESC';
 		break;
 	default:
 		$orderBy = 'tid';
@@ -168,7 +168,36 @@ while ($r=mysql_fetch_array($result)) {
 <a href=editnews.php?tid=<?php echo $r[tid]; ?>>编辑审核</a>
 <a onClick="if(confirm('您确定删除吗?')) {return true;}else {return false;}"  href="delnews.php?tid=<?php echo $r[tid];?>" class="button"  >删除</a>
 <a href=viewnews.php?tid=<?php echo $r[tid]; ?>>查看新闻</a>
-</td></tr>
+</td>
+<td>
+	<?php if($r[recommand] ==0){ ?>
+	<a onClick="if(confirm('您确定加入推荐吗?')) {return true;}else {return false;}"  
+	href="recommand_news.php?tid=<?php echo $r[tid];?>" class="button"  >
+		加入推荐
+	</a>
+	<?php }else{ ?>
+	<a onClick="if(confirm('您确定移除推荐吗?')) {return true;}else {return false;}"  
+	href="recommand_news.php?tid=<?php echo $r[tid];?>" class="button"  >
+		移除推荐
+	</a>
+	<?php } ?>
+</td>
+<td>
+	<?php if($r[placeTop] ==0){ ?>
+	<a onClick="if(confirm('您确定加入置頂吗?')) {return true;}else {return false;}"  
+	href="top_news.php?tid=<?php echo $r[tid];?>" class="button"  >
+		加入置頂
+	</a>
+	<?php }else{ ?>
+	<a onClick="if(confirm('您确定移除置頂吗?')) {return true;}else {return false;}"  
+	href="top_news.php?tid=<?php echo $r[tid];?>" class="button"  >
+		移除置頂
+	</a>
+	<?php } ?>
+
+</td>
+
+</tr>
 
 
 
@@ -190,11 +219,14 @@ mysql_free_result($result)
 </table>
 
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-weight:bold;">
-  <tr><td style="height:28px;width:100%;"><font style="font-weight:bold;">&nbsp;&nbsp;&nbsp;
+  
+    <tr><td style="height:28px;width:100%;"><font style="font-weight:bold;">&nbsp;&nbsp;&nbsp;
     共有<font id="red"><?php echo $amount; ?></font>条&nbsp;&nbsp;共有<font id="red"><?php echo $pagecount; ?></font>页&nbsp;&nbsp;<font id="red"><?php echo $page;?></font>/<?php echo $pagecount;?> </font>
-    &nbsp;&nbsp;  <a href="?tid=<?php echo $_GET[tid]; ?>&page=1&operation=<?php echo $_GET[operation];?>&keywords=<?php echo $_GET[keywords];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>" class="backs">[首页]</a>&nbsp;&nbsp;<?php $i=$_GET[page]-8;$j=$_GET[page]+15;if($i<1){$i=1;}if($j>$pagecount){$j=$pagecount;}for($u=$i;$u<=$j;$u++){echo "&nbsp;<a href=?tid=$_GET[tid]&page=$u&operation=$_GET[operation]&keywords=$_GET[keywords]&startdate=$_GET[startdate]&enddate=$_GET[enddate]&customer_name=$_GET[customer_name]&shipping_id=$_GET[shipping_id]&payment_gross=$_GET[payment_gross]&username=$_GET[username]&jufu_status=$_GET[jufu_status]>$u</a>";} ?>
-    &nbsp;&nbsp;  <a href="?tid=<?php echo $_GET[tid]; ?>&page=<?php echo $pagecount;?>&operation=<?php echo $_GET[operation];?>&keywords=<?php echo $_GET[keywords];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>" class="backs">[尾页]</a> <a href="?tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page-1);?>&&keywords=<?php echo $_GET[keywords];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>" >上一页</a>   <a href="?tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page+1);?>&keywords=<?php echo $_GET[keywords];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>">下一页</a></td></tr>
-   
+    &nbsp;&nbsp;  <a href="?sorting=<?php echo $_GET[sorting]; ?>&desc=<?php echo $_GET[desc]; ?>&keywords=<?php echo $_GET[keywords]; ?>&page=1" class="backs">[首页]</a>&nbsp;&nbsp;<?php $i=$_GET[page]-4;$j=$_GET[page]+4;if($i<1){$i=1;}if($j>$pagecount){$j=$pagecount;}for($u=$i;$u<=$j;$u++){echo "&nbsp;<a href=?page=$u&sorting=$_GET[sorting]&desc=$_GET[desc]>$u</a>";} ?>
+    &nbsp;&nbsp;  <a href="?sorting=<?php echo $_GET[sorting]; ?>&desc=<?php echo $_GET[desc]; ?>&keywords=<?php echo $_GET[keywords]; ?>&page=<?php echo $pagecount;?>" class="backs">[尾页]</a>
+	<a href="?sorting=<?php echo $_GET[sorting]; ?>&desc=<?php echo $_GET[desc]; ?>&keywords=<?php echo $_GET[keywords]; ?>&tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page-1);?>&invoice=<?php echo $_GET[invoice];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>">上一页</a>
+	<a href="?sorting=<?php echo $_GET[sorting]; ?>&desc=<?php echo $_GET[desc]; ?>&keywords=<?php echo $_GET[keywords]; ?>&tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page+1);?>&invoice=<?php echo $_GET[invoice];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>">下一页</a>
+    </td></tr>
    
 </table>
 <?php 
