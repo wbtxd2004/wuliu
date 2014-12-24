@@ -58,11 +58,12 @@ $result = mysql_db_query($DataBase, $query);
 ?>
 <table width=98% align=center cellspacing=1 cellpadding=3 class=i_table>
 <tr>
-  <td class=head colspan=4><b>通讯录群组列表</b></td>
+  <td class=head colspan=5><b>通讯录群组列表</b></td>
 </tr>
 <tr align="center" class="head_1">
 <td>ID</td>
 <td>群组名称</td>
+<td>群发短信</td>
 
 <td>编辑</td>
 <td>删除</td>
@@ -75,6 +76,7 @@ while($row=mysql_fetch_array($result))
 	echo "<tr  align=center class=b>";
 	echo "<td>".$row["tid"]."</td>";
 	echo "<td>".$row["name"]."</td>";
+	echo "<td><a href=send_message.php?id=".$row["tid"].">群发短信</a></td>";
 	echo "<td><a href='edit_group.php?tid=".$row["tid"]."'>编辑</a></td>";
 	echo "<td>";
 	?>
@@ -90,7 +92,10 @@ echo "</table>\n";
     <tr><td style="height:28px;width:100%;"><font style="font-weight:bold;">&nbsp;&nbsp;&nbsp;
     共有<font id="red"><?php echo $amount; ?></font>条&nbsp;&nbsp;共有<font id="red"><?php echo $pagecount; ?></font>页&nbsp;&nbsp;<font id="red"><?php echo $page;?></font>/<?php echo $pagecount;?> </font>
     &nbsp;&nbsp;  <a href="?page=1" class="backs">[首页]</a>&nbsp;&nbsp;<?php $i=$_GET[page]-4;$j=$_GET[page]+4;if($i<1){$i=1;}if($j>$pagecount){$j=$pagecount;}for($u=$i;$u<=$j;$u++){echo "&nbsp;<a href=?page=$u>$u</a>";} ?>
-    &nbsp;&nbsp;  <a href="?page=<?php echo $pagecount;?>" class="backs">[尾页]</a></td></tr>
+    &nbsp;&nbsp;  <a href="?page=<?php echo $pagecount;?>" class="backs">[尾页]</a>
+	<a href="?sorting=<?php echo $orderBy ?>&desc=<?php echo $desc ?>&page=<?php echo($page-1);?>">上一页</a>
+	<a href="?sorting=<?php echo $orderBy ?>&desc=<?php echo $desc ?>&page=<?php echo($page+1);?>">下一页</a>
+    </td></tr>
    
    
 </table>
