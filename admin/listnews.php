@@ -139,15 +139,15 @@ while ($r=mysql_fetch_array($result)) {
 	$r2 = mysql_fetch_array($result2);
 
 	/** get News image **/
-	$query3 = "select * from news_images where nid='$r[tid]' AND filetype = '0' LIMIT 1";
+	$query3 = "select * from news_images where nid='$r[tid]' AND filetype = '0' ORDER BY sort_order";
 	$result3= mysql_db_query($DataBase,$query3);
-	$r3 = mysql_fetch_array($result3);
-	if($r3){
+	$imgHTML = '&nbsp;';
+	while($r3 = mysql_fetch_array($result3)){
+
 		$fileName = $r3[filename];
 		$path = 'news_images/small/'.$fileName;
-		$imgHTML = '<img src="'.$path.'" style="max-height: 36px; max-width: 36px;" />';
-		}else{
-		$imgHTML = '&nbsp;';
+		$imgHTML .= '<img src="'.$path.'" width="50" />&nbsp;';
+		
 	}
 
 
@@ -222,10 +222,9 @@ mysql_free_result($result)
   
     <tr><td style="height:28px;width:100%;"><font style="font-weight:bold;">&nbsp;&nbsp;&nbsp;
     共有<font id="red"><?php echo $amount; ?></font>条&nbsp;&nbsp;共有<font id="red"><?php echo $pagecount; ?></font>页&nbsp;&nbsp;<font id="red"><?php echo $page;?></font>/<?php echo $pagecount;?> </font>
-    &nbsp;&nbsp;  <a href="?sorting=<?php echo $_GET[sorting]; ?>&desc=<?php echo $_GET[desc]; ?>&keywords=<?php echo $_GET[keywords]; ?>&page=1" class="backs">[首页]</a>&nbsp;&nbsp;<?php $i=$_GET[page]-4;$j=$_GET[page]+4;if($i<1){$i=1;}if($j>$pagecount){$j=$pagecount;}for($u=$i;$u<=$j;$u++){echo "&nbsp;<a href=?page=$u&sorting=$_GET[sorting]&desc=$_GET[desc]>$u</a>";} ?>
-    &nbsp;&nbsp;  <a href="?sorting=<?php echo $_GET[sorting]; ?>&desc=<?php echo $_GET[desc]; ?>&keywords=<?php echo $_GET[keywords]; ?>&page=<?php echo $pagecount;?>" class="backs">[尾页]</a>
-	<a href="?sorting=<?php echo $_GET[sorting]; ?>&desc=<?php echo $_GET[desc]; ?>&keywords=<?php echo $_GET[keywords]; ?>&tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page-1);?>&invoice=<?php echo $_GET[invoice];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>">上一页</a>
-	<a href="?sorting=<?php echo $_GET[sorting]; ?>&desc=<?php echo $_GET[desc]; ?>&keywords=<?php echo $_GET[keywords]; ?>&tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page+1);?>&invoice=<?php echo $_GET[invoice];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>">下一页</a>
+    &nbsp;&nbsp;  <a href="?sorting=<?php echo $_GET[sorting]; ?>&desc=<?php echo $_GET[desc]; ?>&page=1" class="backs">[首页]</a>&nbsp;&nbsp;<?php $i=$_GET[page]-4;$j=$_GET[page]+4;if($i<1){$i=1;}if($j>$pagecount){$j=$pagecount;}for($u=$i;$u<=$j;$u++){echo "&nbsp;<a href=?page=$u&sorting=$_GET[sorting]&desc=$_GET[desc]>$u</a>";} ?>
+    &nbsp;&nbsp;  <a href="?sorting=<?php echo $_GET[sorting]; ?>&desc=<?php echo $_GET[desc]; ?>&page=<?php echo $pagecount;?>" class="backs">[尾页]</a>
+	<a href="?sorting=<?php echo $_GET[sorting]; ?>&desc=<?php echo $_GET[desc]; ?>&tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page-1);?>&&invoice=<?php echo $_GET[invoice];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>" >上一页</a>   <a href="?sorting=<?php echo $_GET[sorting]; ?>&desc=<?php echo $_GET[desc]; ?>&tid=<?php echo $_GET[tid]; ?>&operation=<?php echo $_GET[operation]; ?>&page=<?php echo($page+1);?>&invoice=<?php echo $_GET[invoice];?>&startdate=<?php echo $_GET[startdate];?>&enddate=<?php echo $_GET[enddate];?>&customer_name=<?php echo $_GET[customer_name];?>&shipping_id=<?php echo $_GET[shipping_id];?>&payment_gross=<?php echo $_GET[payment_gross];?>&username=<?php echo $_GET[username];?>&jufu_status=<?php echo $_GET[jufu_status];?>">下一页</a>
     </td></tr>
    
 </table>
@@ -237,10 +236,10 @@ include("bottom.html");
 function sortingLink($fieldName){
 	$html ='';
 	$html .='<a href="?sorting='.$fieldName.'">';
-	$html .='<font face="Webdings">5</font>';
+	$html .='<font face="Webdings"  style="font-family:font-family:Verdana,Arial,Sans;">&#9650;</font>';
 	$html .='</a>';
 	$html .='<a href="?sorting='.$fieldName.'&desc=1">';
-	$html .='<font face="Webdings">6</font>';
+	$html .='<font face="Webdings"  style="font-family:font-family:Verdana,Arial,Sans;">&#9660</font>';
 	$html .='</a>';
 	return $html;
 }

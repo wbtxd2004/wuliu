@@ -289,10 +289,10 @@ mysql_free_result($result);
 function sortingLink($fieldName){
 	$html ='';
 	$html .='<a href="?sorting='.$fieldName.'&desc=0">';
-	$html .='<font>&#9652</font>';
+	$html .='<font face="Webdings" style="font-family:font-family:Verdana,arial,Sans;">&#9652</font>';
 	$html .='</a>';
 	$html .='<a href="?sorting='.$fieldName.'&desc=1">';
-	$html .='<font>&#9662</font>';
+	$html .='<font face="Webdings" style="font-family:font-family:Verdana,arial,Sans;">&#9662</font>';
 	$html .='</a>';
 	return $html;
 }

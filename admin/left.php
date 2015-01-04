@@ -164,6 +164,7 @@ function CheckAll(form)
 
 
 <a href="listnews_reply.php" target="mainframe">新闻评论列表</a><br>
+<a href="search_reply.php" target="mainframe">评论搜索</a><br>
 
 			</td>
         </tr>
