@@ -127,7 +127,7 @@ $a=($_GET[page]-1)*$page_size;
 
 
 $query = "select * from news  where $t  ORDER BY  $orderBy  limit $a,$page_size ";
-echo $query.'<br>';
+//echo $query.'<br>';
 
 $result = mysql_db_query($DataBase, $query);
 
