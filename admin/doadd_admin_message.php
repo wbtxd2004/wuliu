@@ -22,7 +22,7 @@ exit;
 $biaoti=$_POST["biaoti"];
 $info=$_POST["info"];
 $member_id=$_POST["member_id"];
-$admin_id=$_SESSION["admin_id"];
+$admin_id=$_SESSION["adminusername2"];
 $ip = $_SERVER["REMOTE_ADDR"];
 $dtime=date("Y-m-d H:i:s");
 
@@ -78,7 +78,6 @@ for($i=0;$i<$num;$i++)
 {
 	get_size($_FILES['upload_file']['size'][$i]);
 	get_ext($_FILES['upload_file']['name'][$i]);
-	//echo "passed";
 }
 }
 
@@ -160,16 +159,8 @@ for($i=0;$i<$num2;$i++)
 
 
 
-$query = "INSERT INTO admin_get_message(`biaoti`,`info`,`member_id`,`admin_id`,`ip`,`dtime`,`filename1`, `filename2`, `filename3`, `filename4`, `filename5`, `filename6`, `filename7`, `filename8`, `filename9`, `filename10`, `filename11`) VALUES('$biaoti','$info','$member_id','$admin_id','$ip','$dtime', '', '', '', '', '', '', '', '', '', '', '') ";
-//$query = "INSERT INTO admin_get_message (`biaoti`, `info`, `member_id`, `admin_id`, `ip`, `dtime`, `filename1`, `filename2`, `filename3`, `filename4`, `filename5`, `filename6`, `filename7`, `filename8`, `filename9`, `filename10`, `filename11`) VALUES ('$biaoti','$info','$member_id','$admin_id','$ip','$dtime', '', '', '', '', '', '', '', '', '', '', '')";
-//$result = mysql_db_query($DataBase, $query);
-//var_dump($result);
-mysql_select_db($DataBase);
-$result = mysql_query($query);
-if (!$result)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
+$query = "INSERT INTO admin_get_message(`biaoti`,`info`,`member_id`,`admin_id`,`ip`,`dtime`) VALUES('$biaoti','$info','$member_id','$admin_id','$ip','$dtime') ";
+$result = mysql_db_query($DataBase, $query);
 
 
 $tid=mysql_insert_id();
@@ -261,11 +252,32 @@ for($i=0;$i<$num2;$i++)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if($result){
 echo"私信添加成功！";
 echo "<META HTTP-EQUIV=REFRESH CONTENT='1;URL=list_admin_message.php'>";
 }
-
 
 
 ?>

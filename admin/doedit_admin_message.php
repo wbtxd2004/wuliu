@@ -212,22 +212,27 @@ if(!file_exists($dir1.$current_date))
 $dir1=$dir1.$current_date."/";
 
 
-$query="SELECT filename FROM admin_get_message_images WHERE mid=$tid";
+$query="SELECT * FROM admin_get_message_images WHERE mid='$tid'";
 	$result2=mysql_db_query($DataBase,$query);
-	$offset2=mysql_num_rows($result);
+	$offset2=mysql_num_rows($result2);
+	//echo $query;
+//echo $offset2;
 
+//echo"aaaaaaaaaaaaaaaaaa";
+//exit;
 for($i=0;$i<$up_num2;$i++)
 {
 
 	$tmp_name=$_FILES['upload_file1']['tmp_name'][$i];
 	$type=get_type2($_FILES['upload_file1']['name'][$i]);
-	$f_name=$tid."_".($offset+$i+1).".".$type;
+	$f_name=$tid."_".($offset2+$i+1).".".$type;
 	$dirname=$dir1.$f_name;
 	$insert_name=$current_date."/".$f_name;
 	move_uploaded_file($tmp_name,$dirname);
 
 
 	   $query="INSERT INTO admin_get_message_images(`mid`,`filename`,`filetype`) VALUES('$tid','$insert_name','1') ";
+	   echo $query ;
 		mysql_db_query($DataBase, $query);
 }
 

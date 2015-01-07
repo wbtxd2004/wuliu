@@ -15,6 +15,20 @@ else
 {
 	include_once("../db.php");
 	$tid=$_GET["tid"];
+	$sql="select filename from admin_get_message_images where mid=$tid";
+	$r=mysql_db_query($DataBase,$sql);
+	while($row=mysql_fetch_array($r))
+	{
+		if($row['filetype'] === 0){
+			unlink("message_image/big/".$row["filename"]);
+			unlink("message_image/small/".$row["filename"]);			
+		}elseif($row['filetype'] === 1){
+			unlink("message_audio/".$row["filename"]);		
+		}
+	}
+	$query="DELETE FROM admin_get_message_images WHERE `mid`=$tid";
+	mysql_db_query($DataBase, $query);
+
 	$query="DELETE FROM admin_get_message WHERE `tid`=$tid";
 	$result=mysql_db_query($DataBase, $query);
 	if($result)
@@ -22,6 +36,7 @@ else
 		echo"私信删除成功！";
 		echo "<META HTTP-EQUIV=REFRESH CONTENT='1;URL=list_admin_message.php'>";
 	}
+
 }
 ?>
 <?php include("bottom.html"); ?>

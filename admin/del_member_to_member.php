@@ -9,12 +9,26 @@ include("header.html");
 if(!$_GET["tid"])
 {
 	echo "没有传入删除群组ID，<p>";
-	echo "<a href='list_member_message.php'>查看私信</>";
+	echo "<a href='list_member_to_member.php'>查看私信</>";
 }
 else
 {
 	include_once("../db.php");
 	$tid=$_GET["tid"];
+	$sql="select filename from member_to_member_images where mid=$tid";
+	$r=mysql_db_query($DataBase,$sql);
+	while($row=mysql_fetch_array($r))
+	{
+		if($row['filetype'] === 0){
+			unlink("message_image/big/".$row["filename"]);
+			unlink("message_image/small/".$row["filename"]);			
+		}elseif($row['filetype'] === 1){
+			unlink("message_audio/".$row["filename"]);		
+		}
+	}
+	$query="DELETE FROM member_to_member_images WHERE `mid`=$tid";
+	mysql_db_query($DataBase, $query);
+
 	$query="DELETE FROM member_to_member WHERE `tid`=$tid";
 	$result=mysql_db_query($DataBase, $query);
 	if($result)
@@ -23,5 +37,6 @@ else
 		echo "<META HTTP-EQUIV=REFRESH CONTENT='1;URL=list_member_to_member.php'>";
 	}
 }
+
 ?>
 <?php include("bottom.html"); ?>
