@@ -23,14 +23,7 @@ echo $_POST["biaoti"];
 echo $_POST["cid"];
 echo $_POST["info"];
 */
-$caifu=$_POST["caifu"];
-echo "$caifu";
-
-
-
-
-
-
+ 
 
 $ip = $_SERVER["REMOTE_ADDR"];
 $dtime=date("Y-m-d H:i:s");
@@ -148,19 +141,20 @@ if($_FILES["upload_file1"]["name"][0]!="")
 //*********************************开始判断声音文件格式及大小数量*********************************************************************
 
 
-//danwei_id 
-$adminId = $_SESSION[adminId];
-$query = "SELECT danwei_id FROM beian_manage WHERE `tid` = $adminId";
-$result = mysql_db_query($DataBase, $query);
-$r=mysql_fetch_array($result);
-//$danwei_id = $r['danwei_id'];
-$danwei_id = 1;
 
-$query = "INSERT INTO asks (biaoti,cid,info,`danwei_id`,`ip`,`dtime`,`shang`) VALUES ('$_POST[biaoti]','$_POST[cid]','$_POST[info]','$danwei_id','$ip','$dtime','$caifu')";
+
+
+
+$query = "INSERT INTO asks (`biaoti`,`cid`,`info`,`ip`,`dtime`) VALUES ('$_POST[biaoti]','$_POST[cid]','$_POST[info]','$ip','$dtime')";
+//$result = mysql_db_query($DataBase, $query);
+//var_dump($result);
 $result = mysql_db_query($DataBase, $query);
+
+
 $tid=mysql_insert_id();
-//echo $query."<br>";
-//echo $tid."<br>";
+
+
+
 
 if($_FILES["upload_file"]["name"][0]!="")
 {
@@ -215,7 +209,6 @@ if($_FILES["upload_file"]["name"][0]!="")
 		   imagedestroy($src_image);
 		   $query="INSERT INTO ask_images(`ask_id`,`filename`) VALUES('$tid','$insert_name') ";
 			mysql_db_query($DataBase, $query);
-			echo $query."<br>";
 	}
 }
 
@@ -261,7 +254,7 @@ if($_FILES["upload_file1"]["name"][0]!="")
 
 
 echo"问答添加成功！";	
-//echo "<META HTTP-EQUIV=REFRESH CONTENT='1;URL=listask.php'>";
+echo "<META HTTP-EQUIV=REFRESH CONTENT='1;URL=listask.php'>";
 
 ?>
 <META http-equiv=Content-Type content=text/html;charset=utf-8>

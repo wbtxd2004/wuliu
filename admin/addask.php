@@ -23,7 +23,7 @@ function check()
     obj1=document.f.biaoti;
     obj2=document.f.info;
 
-
+ 
     file_num=document.f["upload_file[]"].files.length;
     if(obj1.value=="")
     {
@@ -107,12 +107,6 @@ echo"<option value=$r4[tid] >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C  
   </select>
   
   </td></tr>
-  <tr align=center>
-  <td class=b width=29%>悬赏值:</td>
-  <td class=b>
-  <input type="text" name=caifu value='0'/>
-  </td>
-  </tr>
   <tr align=center>
   <td class=b width=29%>回答:</td>
   <td colspan="3" class=b><textarea cols="50" rows="10" name="info" ></textarea></td>
