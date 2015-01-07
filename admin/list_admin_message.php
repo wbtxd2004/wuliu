@@ -1,7 +1,7 @@
 <?php
 include_once("checksession.php");
 include("header.html");
-?>
+?> 
 <META http-equiv=Content-Type content=text/html;charset=utf-8>
 
 <center>
